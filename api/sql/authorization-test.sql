@@ -1,0 +1,1 @@
+INSERT INTO "ride-share"."authorization" ("driverId", "vehicleId") VALUES (3, 1);

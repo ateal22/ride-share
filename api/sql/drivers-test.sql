@@ -1,0 +1,1 @@
+INSERT INTO "ride-share".drivers ("driverId", "rideId") VALUES (3, 1);

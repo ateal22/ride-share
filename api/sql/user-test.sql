@@ -1,0 +1,4 @@
+INSERT INTO "ride-share"."user" (id, "firstName", "lastName", email, password, phone, "isAdmin") VALUES (1, 'Obi Wan', 'Kenobi', 'obiK@hello.com', 'h1ghground', '123-123-1234', false);
+INSERT INTO "ride-share"."user" (id, "firstName", "lastName", email, password, phone, "isAdmin") VALUES (2, 'Anakin', 'Skywalker', 'jedimaster@yahoo.com', 'MasterJedi', '456-456-4567', false);
+INSERT INTO "ride-share"."user" (id, "firstName", "lastName", email, password, phone, "isAdmin") VALUES (3, 'Han', 'Solo', 'falcon@kessel.com', 'chewie123', '567-567-5667', false);
+INSERT INTO "ride-share"."user" (id, "firstName", "lastName", email, password, phone, "isAdmin") VALUES (4, 'Luke', 'Skywalker', 'luke@toschestation.com', 'maythe4cebwithU', '987-987-9876', false);

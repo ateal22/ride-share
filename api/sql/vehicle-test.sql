@@ -1,0 +1,1 @@
+INSERT INTO "ride-share".vehicle (id, make, model, color, "vehicleTypeId", capacity, mpg, "licenseState", "licensePlate") VALUES (1, 'falcon', 'millenium', 'grey', 1, 4, 35, 'NJ', '12');

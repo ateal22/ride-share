@@ -1,0 +1,2 @@
+INSERT INTO "ride-share".location (id, name, address, city, state, "zipCode") VALUES (1, 'Hoth', '23 Echobase Lane', 'Waterford', 'NJ', '56914');
+INSERT INTO "ride-share".location (id, name, address, city, state, "zipCode") VALUES (3, 'Tatooine', '96 Hutt St', 'Mos Eisley', 'TX', '055412');

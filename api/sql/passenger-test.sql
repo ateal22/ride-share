@@ -1,0 +1,1 @@
+INSERT INTO "ride-share".passenger ("userId", "rideId") VALUES (4, 1);

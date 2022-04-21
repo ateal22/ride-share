@@ -1,0 +1,1 @@
+INSERT INTO "ride-share".driver (id, "userId", "licenseNumber", "licenseState") VALUES (3, 3, '12', 'NJ');

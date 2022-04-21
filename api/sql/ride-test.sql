@@ -1,0 +1,1 @@
+INSERT INTO "ride-share".ride (id, date, time, distance, "fuelPrice", fee, "vehicleId", "fromLocationId", "toLocationId") VALUES (1, '2022-04-21', '12:20:00', 85, 3.99, 10, 1, 1, 3);
