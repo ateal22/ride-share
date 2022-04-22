@@ -1,0 +1,49 @@
+class Vehicle extends Model {
+    static get tableName() {
+        return 'Vehicle';
+    }
+
+    static get relationMappings() {
+        return {
+            Driver: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Driver,
+                join: {
+                    from: 'Vehicle.id',
+                    through: {
+                        from: 'Authorization.vehicleId',
+                        to: 'Authorization.driverId'
+                    },
+                    to: 'Driver.id'
+                }
+            },
+            Authorization: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Authorization,
+                join: {
+                    from: 'Authorization.vehicleId',
+                    to: 'Vehicle.id'
+                }
+            },
+            State: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: State,
+                join: {
+                    from: 'State.abbreviation',
+                    to: 'Vehicle.licenseState'
+                }
+            },
+            VehicleType: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: VehicleType,
+                join: {
+                    from: 'VehicleType.id',
+                    to: 'Vehicle.vehicleTypeId'
+                }
+            }
+        }
+    }
+}
+
+
+
