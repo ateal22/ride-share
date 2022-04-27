@@ -1,0 +1,13 @@
+{
+  "name": "ride-share",
+  "version": "1.0.0",
+  "repository": "https://github.com/ateal22/ride-share.git",
+  "license": "MIT",
+  "dependencies": {
+    "@hapi/hapi": "^20.2.2",
+    "blipp": "^4.0.2",
+    "knex": "^2.0.0",
+    "objection": "^3.0.1",
+    "pg": "^8.7.3"
+  }
+}
