@@ -3,10 +3,11 @@ const knex = require("knex")({
   client: "pg",
   connection: {
     host: "pg.cse.taylor.edu", // PostgreSQL server
-    user: "john_hammond", // Your user name
-    password: "ranogaho", // Your password
-    database: "john_hammond", // Your database name
+    user: "allison_teal", // Your user name
+    password: "tacipeme", // Your password
+    database: "allison_teal", // Your database name
   },
+  searchPath: ["ride-share"],
 });
 
 // Objection
@@ -21,7 +22,7 @@ const Joi = require("@hapi/joi"); // Input validation
 const Hapi = require("@hapi/hapi"); // Server
 
 const server = Hapi.server({
-host: "localhost",
+  host: "localhost",
   port: 3000,
   routes: {
     cors: true,
@@ -162,40 +163,40 @@ async function init() {
         }
       },
     },
-  {
-    method: "POST",
-    path: "/reset-password",
-    config: {
-      description: "reset password",
-      validate: {
-        payload: Joi.object({
-          email: Joi.string().email().required(),
-          currentPassword: Joi.string().required(),
-          newPassword: Joi.string().required(),
-          confirmPassword: Joi.string().required(),
-        }),
+    {
+      method: "POST",
+      path: "/reset-password",
+      config: {
+        description: "reset password",
+        validate: {
+          payload: Joi.object({
+            email: Joi.string().email().required(),
+            currentPassword: Joi.string().required(),
+            newPassword: Joi.string().required(),
+            confirmPassword: Joi.string().required(),
+          }),
+        },
+      },
+      handler: async (request, h) => {
+        const account = await Account.query()
+          .where("email", request.payload.email)
+          .first();
+        if (
+          account &&
+          (await account.verifyPassword(request.payload.currentPassword))
+        ) {
+          return {
+            ok: true,
+            msge: "Password updated successfully"
+          };
+        } else {
+          return {
+            ok: false,
+            msge: "Invalid email or password",
+          };
+        }
       },
     },
-    handler: async (request, h) => {
-      const account = await Account.query()
-        .where("email", request.payload.email)
-        .first();
-      if (
-        account &&
-        (await account.verifyPassword(request.payload.currentPassword))
-      ) {
-        return {
-          ok: true,
-          msge: "Password updated successfully"
-        };
-      } else {
-        return {
-          ok: false,
-          msge: "Invalid email or password",
-        };
-      }
-    },
-  },
   ]);
 
   // Start the server.
