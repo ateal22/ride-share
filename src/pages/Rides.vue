@@ -1,46 +1,53 @@
 <template>
+
+
   <v-container>
+
+    
+
+    <div align="center">
+      <h4 class="display-1">Rides</h4>
+
+      <h2> Join a ride here! </h2>
+
+      
     <div>
-      <h4 class="display-1">Reset Password</h4>
+      <div class="search-wrapper panel-heading mt-10 px-1" align="left" style="background-color:#B3E5FC">
+        <input type="text" v-model="search" placeholder="Search for a Ride" /> </div>
+    </div>
 
-      <instructions details="Reset your password here" />
+    <div>
+      <table id="rideTable">
+        <col style="width:17%" />
+        <col style="width:17%"/>
+        <col style="width:17%"/>
+        <col style="width:17%"/>
+        <col style="width:17%"/>
+        <col style="width:17%"/>
+        <thead>
+          <tr>
+            <th>Start Location</th>
+            <th>Destination</th>
+            <th>Departure Time</th>
+            <th>Driver</th>
+            <th>Number of Passengers</th>
+            <th>Available Seats</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
 
-      <v-form v-model="valid">
-        <v-text-field
-          v-model="member.email"
-          label="Email"
-          name="email"
-          type="text"
-        ></v-text-field>
-        <v-text-field
-          v-model="member.currentPassword"
-          id="password"
-          label="Current Password"
-          name="password"
-          type="password"
-        ></v-text-field>
-        <v-text-field
-          v-model="member.newPassword"
-          id="newPassword"
-          label="New Password"
-          name="newPassword"
-          type="password"
-        ></v-text-field>
-        <v-text-field
-          v-model="member.confirmPassword"
-          id="confirmPassword"
-          v-bind:rules="rules.confirmPassword"
-          type="password"
-          label="Confirm new password"
-          required
-        >
-        </v-text-field>
-        <v-btn v-bind:disabled="!valid" v-on:click="handleSubmit"
-          >Reset Password
+    <div align="center" class="mt-10">
+        <v-btn v-on:click="handleSubmit" align="left" color="#40C4FF" class="mx-10"
+          >Sign up as Driver
         </v-btn>
-      </v-form>
 
-      <div class="text-xs-center">
+        <v-btn v-on:click="handleSubmit" align="right" color="#40C4FF" class="mx-10"
+          >Sign up as Passenger
+        </v-btn>
+    </div>
+
+    <div class="text-xs-center">
         <v-dialog v-model="dialogVisible" width="500">
           <v-card>
             <v-card-title primary-title>
@@ -55,7 +62,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" text v-on:click="hideDialog">Okay</v-btn>
+              <v-btn color="#80D8FF" text v-on:click="hideDialog">Okay</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -65,12 +72,11 @@
 </template>
 
 <script>
-import Instructions from "../components/Instructions.vue";
 
 export default {
-  name: "ResetPasswordPage",
+  name: "RidesPage",
   components: {
-    Instructions, // Use the Instructions component we just imported
+    //Instructions, // Use the Instructions component we just imported
   },
   data: function() {
     return {
@@ -114,6 +120,8 @@ export default {
           (val) => /[a-z]/.test(val) || "Need lower case letter",
           (val) => /\d/.test(val) || "Need digit",
           (val) => val.length >= 8 || "Minimum 8 characters",
+          //(val) => strcmp(newPassword, confirmPassword) || "New Passord Matches"
+          // api query update password field with new password
         ],
       },
     };
@@ -163,4 +171,5 @@ export default {
     },
   },
 };
+
 </script>

@@ -3,7 +3,7 @@
     <div>
       <h4 class="display-1">Sign Up</h4>
 
-      <instructions details="Sign up for our nifty site." />
+
 
       <v-form v-model="valid">
         <v-text-field
@@ -63,13 +63,11 @@
 </template>
 
 <script>
-import Instructions from "../components/Instructions.vue";
+
 
 export default {
   name: "SignUpPage",
-  components: {
-    Instructions, // Use the Instructions component we just imported
-  },
+  
   data: function () {
     return {
       valid: false, // Are all the fields in the form valid?
