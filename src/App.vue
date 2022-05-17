@@ -6,11 +6,6 @@
         <router-view></router-view>
       </v-container>
     </v-content>
-    <v-footer class="pa-3">
-      <v-layout justify-center class="font-weight-thin">
-        Get going where you're going!
-      </v-layout>
-    </v-footer>
   </v-app>
 </template>
 
