@@ -2,7 +2,7 @@
   <v-app-bar app dark color="success">
     <router-link v-bind:to="{ name: 'home-page' }">
       <v-toolbar-title class="white--text">
-        Ride Share
+        RideZone
       </v-toolbar-title>
     </router-link>
 
@@ -23,14 +23,14 @@
       <template v-slot:activator="{ on }">
         <v-btn text v-on="on">
           <v-icon dark>mdi-account</v-icon>
-          <span>{{ $store.state.currentAccount.firstName }}</span>
+          <span>{{ $store.state.currentUser.firstName }}</span>
           <v-icon dark>mdi-menu-down</v-icon>
         </v-btn>
       </template>
 
       <v-list>
-        <v-list-item v-bind:to="{ name: 'accounts' }">
-          <v-list-item-title>Accounts</v-list-item-title>
+        <v-list-item v-bind:to="{ name: 'User' }">
+          <v-list-item-title>Users</v-list-item-title>
         </v-list-item>
 
         <v-divider></v-divider>

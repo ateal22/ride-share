@@ -5,7 +5,7 @@ import Home from "./pages/Home.vue";
 import SignIn from "./pages/SignIn.vue";
 import SignUp from "./pages/SignUp.vue";
 import About from "./pages/About.vue";
-import Accounts from "./pages/Accounts.vue";
+import User from "./pages/Users.vue";
 import Rides from "./pages/Rides.vue";
 import Map from "./pages/Map.vue";
 
@@ -19,7 +19,7 @@ export default new Router({
     { name: "sign-up", path: "/sign-up", component: SignUp },
     { name: "sign-in", path: "/sign-in", component: SignIn },
     { name: "about-us", path: "/about-us", component: About },
-    { name: "accounts", path: "/accounts", component: Accounts },
+    { name: "users", path: "/users", component: User },
     { name: "rides", path: "/rides", component: Rides },
     { name: "map", path: "/map", component: Map },
   ]

@@ -72,7 +72,7 @@ export default {
     return {
       valid: false, // Are all the fields in the form valid?
 
-      // Object to collect account data
+      // Object to collect user data
       newMember: {
         firstName: "",
         lastName: "",
@@ -80,8 +80,8 @@ export default {
         password: "",
       },
 
-      // Was an account created successfully?
-      accountCreated: false,
+      // Was an user created successfully?
+      userCreated: false,
 
       // Data to be displayed by the dialog.
       dialogHeader: "<no dialogHeader>",
@@ -112,11 +112,11 @@ export default {
     // Invoked when the user clicks the 'Sign Up' button.
     handleSubmit: function () {
       // Haven't been successful yet.
-      this.accountCreated = false;
+      this.userCreated = false;
 
       // Post the content of the form to the Hapi server.
       this.$axios
-        .post("/accounts", {
+        .post("/User", {
           firstName: this.newMember.firstName,
           lastName: this.newMember.lastName,
           email: this.newMember.email,
@@ -127,7 +127,7 @@ export default {
           // appropriate dialog.
           if (result.data.ok) {
             this.showDialog("Success", result.data.msge);
-            this.accountCreated = true;
+            this.userCreated = true;
           } else {
             this.showDialog("Sorry", result.data.msge);
           }
@@ -146,7 +146,7 @@ export default {
     // and navigate to the home page.
     hideDialog: function () {
       this.dialogVisible = false;
-      if (this.accountCreated) {
+      if (this.userCreated) {
         // Only navigate away from the sign-up page if we were successful.
         this.$router.push({ name: "home-page" });
       }

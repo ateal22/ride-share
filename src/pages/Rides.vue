@@ -17,6 +17,29 @@
     </div>
 
     <div>
+
+      <v-data-table
+        v-bind:headers="headers"
+        v-bind:items="Ride"
+      >
+      <template v-slot:item="{item}">
+        <tr v-bind:class="itemClass(item)">
+          <td>{{ item.date }}</td>
+          <td>{{ item.time }}</td>
+          <td>{{ item.fromLocation }}</td>
+          <td>{{ item.toLocation }}</td>
+          <td>{{ item.distance }}</td>
+          <td>
+            <v-icon small @click="deleteAccount(item)">
+              mdi-pencil
+            </v-icon>
+          </td>
+        </tr>
+      </template>
+    </v-data-table>
+
+      </div>
+
       <table id="rideTable">
         <col style="width:17%" />
         <col style="width:17%"/>
@@ -67,12 +90,10 @@
           </v-card>
         </v-dialog>
       </div>
-    </div>
   </v-container>
 </template>
 
 <script>
-
 export default {
   name: "RidesPage",
   components: {
@@ -81,23 +102,19 @@ export default {
   data: function() {
     return {
       valid: false, // Are all the fields in the form valid?
-
-      // Object to collect account data
+      // Object to collect user data
       member: {
         email: "",
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
       },
-
       // Was a password reset successfully?
       resetPassword: false,
-
       // Data to be displayed by the dialog.
       dialogHeader: "<no dialogHeader>",
       dialogText: "<no dialogText>",
       dialogVisible: false,
-
       // Validation rules for the form fields. This functionality is an extension
       // that's part of the Vuetify package. Each rule is a list of functions
       // (note the fat arrows). Vuetify invokes all functions in the list,
@@ -131,7 +148,6 @@ export default {
     handleSubmit: function() {
       // Haven't been successful yet.
       this.resetPassword = false;
-
       // Post the content of the form to the Hapi server.
       this.$axios
         .post("/reset-password", {
@@ -152,14 +168,12 @@ export default {
         })
         .catch((err) => this.showDialog("Failed", err));
     },
-
     // Helper method to display the dialog box with the appropriate content.
     showDialog: function(header, text) {
       this.dialogHeader = header;
       this.dialogText = text;
       this.dialogVisible = true;
     },
-
     // Invoked by the "Okay" button on the dialog; dismiss the dialog
     // and navigate to the home page.
     hideDialog: function() {
@@ -171,5 +185,4 @@ export default {
     },
   },
 };
-
 </script>

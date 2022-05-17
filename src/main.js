@@ -6,7 +6,7 @@ import axios from "axios";
 import App from "./App.vue";
 
 const axiosClient = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "http://localhost:8080",
 });
 Vue.prototype.$axios = axiosClient;
 

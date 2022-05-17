@@ -15,7 +15,7 @@ const objection = require("objection");
 objection.Model.knex(knex);
 
 // Models
-const Account = require("./models/Account");
+const User = require("./models/User");
 
 // Hapi
 const Joi = require("@hapi/joi"); // Input validation
@@ -45,7 +45,7 @@ async function init() {
   server.route([
     {
       method: "POST",
-      path: "/accounts",
+      path: "/users",
       config: {
         description: "Sign up for an account",
         validate: {
@@ -58,24 +58,25 @@ async function init() {
         },
       },
       handler: async (request, h) => {
-        const existingAccount = await Account.query()
+        const existingUser = await User.query()
           .where("email", request.payload.email)
           .first();
-        if (existingAccount) {
+        if (existingUser) {
           return {
             ok: false,
             msge: `Account with email '${request.payload.email}' is already in use`,
           };
         }
 
-        const newAccount = await Account.query().insert({
+        const newUser = await User.query().insert({
           first_name: request.payload.firstName,
           last_name: request.payload.lastName,
           email: request.payload.email,
           password: request.payload.password,
+          phone: request.payload.phone,
         });
 
-        if (newAccount) {
+        if (newUser) {
           return {
             ok: true,
             msge: `Created account '${request.payload.email}'`,
@@ -91,18 +92,18 @@ async function init() {
 
     {
       method: "GET",
-      path: "/accounts",
+      path: "/users",
       config: {
-        description: "Retrieve all accounts",
+        description: "Retrieve all users",
       },
       handler: (request, h) => {
-        return Account.query();
+        return User.query();
       },
     },
 
     {
       method: "DELETE",
-      path: "/accounts/{id}",
+      path: "/users/{id}",
       config: {
         description: "Delete an account",
       },
@@ -125,7 +126,7 @@ async function init() {
 
     {
       method: "POST",
-      path: "/login",
+      path: "/sign-in",
       config: {
         description: "Log in",
         validate: {
@@ -136,21 +137,21 @@ async function init() {
         },
       },
       handler: async (request, h) => {
-        const account = await Account.query()
+        const user = await User.query()
           .where("email", request.payload.email)
           .first();
         if (
-          account &&
-          (await account.verifyPassword(request.payload.password))
+          user &&
+          (await User.verifyPassword(request.payload.password))
         ) {
           return {
             ok: true,
             msge: `Logged in successfully as '${request.payload.email}'`,
             details: {
-              id: account.id,
-              firstName: account.first_name,
-              lastName: account.last_name,
-              email: account.email,
+              id: User.id,
+              firstName: User.first_name,
+              lastName: User.last_name,
+              email: User.email,
             },
           };
         } else {
@@ -168,43 +169,23 @@ async function init() {
         description: "map",
       },
       handler: (request, h) => {
-        return Account.query();
+        return User.query();
       },
     },
     
   {
-    method: "POST",
+    method: "GET",
     path: "/rides",
     config: {
-      description: "rides",
-      validate: {
-        payload: Joi.object({
-
-        }),
-      },
+      description: "Get all rides",
     },
-    
-    handler: async (request, h) => {
-      const account = await Account.query()
-        .where("email", request.payload.email)
-        .first();
-      if (
-        account &&
-        (await account.verifyPassword(request.payload.currentPassword))
-      ) {
-        return {
-          ok: true,
-          msge: "Password updated successfully"
-        };
-      } else {
-        return {
-          ok: false,
-          msge: "Invalid email or password",
-        };
-      }
+    handler: (request, h) => {
+      return Ride.query();
     },
   },
-  ]);
+
+
+]);
 
   // Start the server.
   await server.start();
