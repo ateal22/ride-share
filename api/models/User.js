@@ -1,3 +1,5 @@
+objection = require('objection');
+const Model = objection.Model;
 class User extends Model {
     static get tableName() {
         return 'User';

@@ -1,19 +1,14 @@
 <template>
     <v-container>
-    <div id="app">
-      <div
-        :style="{
-          'background-image': `url(${'https://busites-www.s3.amazonaws.com/blog-margaritaville/2016/06/shutterstock_183694457.jpg'})`,
-          width: '10000px',
-          height: '825px',
-          margin:'0',
-        }"
-        ></div>
-    </div>
     <div class="container">
-      <h4 class="display-1">Welcome to Ride Share!!</h4>
+      <h1 class="display-1 text-center">Welcome to Ride Share!!</h1>
 
-      <p class="body-1">Zoom-Zoom</p>
+      <p class="font-italic text-center">Zoom-Zoom</p>
     </div>
+    <v-img
+      src="https://busites-www.s3.amazonaws.com/blog-margaritaville/2016/06/shutterstock_183694457.jpg"
+      aspect-ratio="1.7"
+      contain
+    ></v-img>
   </v-container>
 </template>
