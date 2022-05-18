@@ -23,6 +23,6 @@ export default new Router({
     { name: "users", path: "/users", component: User },
     { name: "rides", path: "/rides", component: Rides },
     { name: "map", path: "/map", component: Map },
-    { name: "user-home", path: "/userhome", component: UserHome },
+    { name: "userhome", path: "/userhome", component: UserHome },
   ]
 });

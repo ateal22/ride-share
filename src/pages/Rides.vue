@@ -65,9 +65,15 @@
           >Sign up as Driver
         </v-btn>
 
+        <v-btn v-on:click="popup" align="left" color="success" class="mx-10"
+          >popup test
+        </v-btn>
+
         <v-btn v-on:click="handleSubmit" align="right" color="success" class="mx-10"
           >Sign up as Passenger
         </v-btn>
+
+        
     </div>
 
     <div class="text-xs-center">
@@ -183,6 +189,10 @@ export default {
         this.$router.push({ name: "home-page" });
       }
     },
+
+    popup: function() {
+      this.showDialog("info")
+    }
   },
 };
 </script>
