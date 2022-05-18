@@ -46,7 +46,6 @@ export default {
     return {
       email: "",
       password: "",
-
       snackbar: {
         show: false,
         msge: "",
@@ -70,11 +69,12 @@ export default {
         })
         .catch((err) => this.showSnackbar(err));
     },
-
+  
     showSnackbar(msge) {
       this.snackbar.msge = msge;
       this.snackbar.show = true;
     },
   },
 };
+
 </script>

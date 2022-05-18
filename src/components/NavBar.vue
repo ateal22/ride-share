@@ -1,10 +1,23 @@
 <template>
   <v-app-bar app dark color="success">
-    <router-link v-bind:to="{ name: 'home-page' }">
+    <router-link v-if="!isLoggedIn" v-bind:to="{ name: 'home-page' }">
+      <v-toolbar-title class="white--text $font-family: 'Poppins'">
+        RideZone
+      </v-toolbar-title>
+    </router-link>
+
+    <router-link v-if="isLoggedIn" v-bind:to="{ name: 'user-home' }">
       <v-toolbar-title class="white--text">
         RideZone
       </v-toolbar-title>
     </router-link>
+
+    <v-img
+      src="https://freepngimg.com/thumb/mini_cooper/2-2-mini-cooper-png.png"
+      max-height="50"
+      max-width="100"
+      contain
+    ></v-img>
 
     <v-spacer></v-spacer>
 
