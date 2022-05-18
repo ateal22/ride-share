@@ -184,6 +184,19 @@ async function init() {
     },
   },
 
+  /*{
+    method: "POST",
+    path: "/driver",
+    config: {
+      description: "Driver sign up form",
+      validate: {
+        payload: Joi.object({
+          
+        })
+      }
+    }
+  }
+*/
 
 ]);
 
