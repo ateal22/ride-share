@@ -1,12 +1,12 @@
 <template>
     <div >
     <div align="right" class="mt-10">
-        <v-btn v-on:click="handleSubmit" align="right" color="#40C4FF" class="mx-10"
+        <v-btn v-on:click="handleSubmit" align="right" color="success" class="mx-10"
           >Sign up as Driver
         </v-btn>
     </div>
     <div align="right" class="mt-10">
-        <v-btn v-on:click="handleSubmit" align="right" color="#40C4FF" class="mx-10"
+        <v-btn v-on:click="handleSubmit" align="right" color="success" class="mx-10"
           >Sign up as Passenger
         </v-btn>
     </div>

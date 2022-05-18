@@ -8,6 +8,7 @@ import About from "./pages/About.vue";
 import User from "./pages/Users.vue";
 import Rides from "./pages/Rides.vue";
 import Map from "./pages/Map.vue";
+import UserHome from "./pages/UserHome.vue";
 
 Vue.use(Router);
 
@@ -22,5 +23,6 @@ export default new Router({
     { name: "users", path: "/users", component: User },
     { name: "rides", path: "/rides", component: Rides },
     { name: "map", path: "/map", component: Map },
+    { name: "user-home", path: "/userhome", component: UserHome },
   ]
 });

@@ -1,5 +1,3 @@
-
-   
 <template>
   <v-container>
     <div>
@@ -40,6 +38,7 @@
 <script>
 export default {
   name: "Accounts",
+
   data: function() {
     return {
       headers: [
@@ -49,28 +48,32 @@ export default {
         { text: "Action", value: "action" }
       ],
       accounts: [],
+
       snackbar: {
         show: false,
         text: ""
       }
     };
   },
+
   mounted: function() {
-    this.$axios.get("/accounts").then(response => {
-      this.accounts = response.data.map(account => ({
-        id: account.id,
-        email: account.email,
-        firstName: account.first_name,
-        lastName: account.last_name
+    this.$axios.get("/users").then(response => {
+      this.users = response.data.map(users => ({
+        id: users.id,
+        email: users.email,
+        firstName: users.first_name,
+        lastName: users.last_name
       }));
     });
   },
+
   methods: {
     // Display a snackbar message.
     showSnackbar(text) {
       this.snackbar.text = text;
       this.snackbar.show = true;
     },
+
     // Calculate the CSS class for an item
     itemClass(item) {
       const currentAccount = this.$store.state.currentAccount;
@@ -78,19 +81,21 @@ export default {
         return "currentAccount";
       }
     },
+
     // Update account information.
     updateAccount(item) {
       console.log("UPDATE", JSON.stringify(item, null, 2));
       this.showSnackbar("Sorry, update is not yet implemented.");
     },
+
     // Delete an account.
     deleteAccount(item) {
-      this.$axios.delete(`/accounts/${item.id}`).then(response => {
+      this.$axios.delete(`/users/${item.id}`).then(response => {
         if (response.data.ok) {
           // The delete operation worked on the server; delete the local account
           // by filtering the deleted account from the list of accounts.
-          this.accounts = this.accounts.filter(
-            account => account.id !== item.id
+          this.users = this.users.filter(
+            users => users.id !== item.id
           );
         }
       });
@@ -101,6 +106,6 @@ export default {
 
 <style>
 .currentAccount {
-  background: lightcoral;
+  background-color: #80D8FF;
 }
 </style>

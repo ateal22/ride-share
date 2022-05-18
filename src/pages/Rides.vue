@@ -12,7 +12,7 @@
 
       
     <div>
-      <div class="search-wrapper panel-heading mt-10 px-1" align="left" style="background-color:#B3E5FC">
+      <div class="search-wrapper panel-heading mt-10 px-1" align="left" style="background-color:success">
         <input type="text" v-model="search" placeholder="Search for a Ride" /> </div>
     </div>
 
@@ -61,11 +61,11 @@
     </div>
 
     <div align="center" class="mt-10">
-        <v-btn v-on:click="handleSubmit" align="left" color="#40C4FF" class="mx-10"
+        <v-btn v-on:click="handleSubmit" align="left" color="success" class="mx-10"
           >Sign up as Driver
         </v-btn>
 
-        <v-btn v-on:click="handleSubmit" align="right" color="#40C4FF" class="mx-10"
+        <v-btn v-on:click="handleSubmit" align="right" color="success" class="mx-10"
           >Sign up as Passenger
         </v-btn>
     </div>
@@ -85,7 +85,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="#80D8FF" text v-on:click="hideDialog">Okay</v-btn>
+              <v-btn color="success" text v-on:click="hideDialog">Okay</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
