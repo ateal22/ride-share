@@ -1,3 +1,5 @@
+const User = require('./User');
+const Ride = require('./Ride');
 class Driver extends Model {
     static get tableName() {
         return 'Driver';
@@ -11,6 +13,18 @@ class Driver extends Model {
                 join: {
                     from: 'Driver.userId',
                     to: 'User.id'
+                }
+            },
+            Ride: {
+                relation: Model.ManyToManyRelation,
+                modelClass: Ride,
+                join: {
+                    from: 'Driver.id',
+                    through: {
+                        from: 'Drivers.rideId',
+                        to: 'Drivers.driverId'
+                    },
+                    to: 'Ride.id'
                 }
             },
             Authorization: {

@@ -1,3 +1,4 @@
+const Ride = require('./Ride');
 class Location extends Model {
     static get tableName() {
         return 'Location';
@@ -33,3 +34,4 @@ class Location extends Model {
     }
 }
 
+module.exports = Location;

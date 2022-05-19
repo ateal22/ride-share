@@ -1,9 +1,12 @@
+const User = require('./User');
 class Ride extends Model {
     static get tableName() {
         return 'Ride';
     }
 
     static get relationMappings() {
+        
+
         return {
             User: {
                 relation: Model.ManyToManyRelation,
@@ -19,7 +22,7 @@ class Ride extends Model {
             },
             Driver: {
                 relation: Model.ManyToManyRelation,
-                modelClass: User,
+                modelClass: __dirname+'./Driver',
                 join: {
                     from: 'Ride.id',
                     through: {
@@ -29,25 +32,11 @@ class Ride extends Model {
                     to: 'Driver.id'
                 }
             },
-            Drivers: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: Drivers,
-                join: {
-                    from: 'Drivers.driverId',
-                    to: 'Ride.id'
-                }
-            },
-            Passenger: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: Passenger,
-                join: {
-                    from: 'Passenger.rideId',
-                    to: 'Ride.id'
-                }
-            },
+            
+            
             Location: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: Location,
+                modelClass: __dirname+'./Location',
                 join: {
                     from: 'Location.id',
                     to: 'Ride.fromLocationId'
@@ -55,7 +44,7 @@ class Ride extends Model {
             },
             Location: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: Location,
+                modelClass: __dirname+'./Location',
                 join: {
                     from: 'Location.id',
                     to: 'Ride.toLocationId'
@@ -64,3 +53,5 @@ class Ride extends Model {
         }
     }
 }
+
+module.exports = Ride;
