@@ -18,15 +18,37 @@
         </v-btn>
 
     </div>
-        <v-snackbar v-model="snackbar.show">
+      <v-snackbar v-model="snackbar.show">
       {{ snackbar.msge }}
       <v-btn text color="primary" @click="snackbar.show = false">Close</v-btn>
     </v-snackbar>
+
+    <div class="text-xs-center">
+        <v-dialog v-model="dialogVisible" width="500">
+          <v-card>
+            <v-card-title primary-title>
+              {{ dialogHeader }}
+            </v-card-title>
+
+            <v-card-text>
+              {{ dialogText }}
+            </v-card-text>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="success" text v-on:click="hideDialog">Okay</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
   </v-container>
 </template>
 
 <script>
 export default {
+  name: "UserHome",
   data() {
     return {
       dialogHeader: "<no dialogHeader>",
@@ -77,7 +99,7 @@ export default {
       if (this.User.isAdmin==true){
         this.$router.push({ name: "users" });
       } else {
-        this.showDialog("info")
+        this.showDialog("Only Admins can view all users.")
       }
     },
 
