@@ -1,3 +1,4 @@
+const Vehicle = require('./Vehicle');
 class VehicleType extends Model {
     static get tableName() {
         return 'VehicleType';
@@ -16,4 +17,4 @@ class VehicleType extends Model {
         }
     }
 }
-
+module.exports = VehicleType;

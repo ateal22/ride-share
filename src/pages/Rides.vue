@@ -6,16 +6,14 @@
       <h2> Join a ride here! </h2>
 
       </div>
-    <div>
-      <div class="search-wrapper panel-heading mt-10 px-1" align="left" style="background-color:success">
-        <input type="text" v-model="search" placeholder="Search for a Ride" /> </div>
-    </div>
+    
+  
 
     <div>
 
       <v-data-table
         v-bind:headers="headers"
-        v-bind:items="Ride"
+        v-bind:items="rides"
       >
       <template v-slot:item="{item}">
         <tr v-bind:class="itemClass(item)">
