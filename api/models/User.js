@@ -1,22 +1,34 @@
 objection = require('objection');
 const Model = objection.Model;
+const { hash, compare } = require("bcrypt");
+
+const SALT_ROUNDS = 10;
+
+  
 class User extends Model {
     static get tableName() {
         return 'User';
     }
+    // Encrypt the password before storing it in the database.
+  // SHOULD ALSO DO THIS ON UPDATE!
+
+  // eslint-disable-next-line no-unused-vars
+  async $beforeInsert(queryContext) {
+    this.password = await hash(this.password, SALT_ROUNDS);
+  }
+
+  async verifyPassword(plainTextPassword) {
+    console.log(`compare(${plainTextPassword}, ${this.password})`);
+    return compare(plainTextPassword, this.password);
+  }
+
+
     static get relationMappings() {
         return {
-            Passenger: {
-                relation: Model.BelongsToOneRelation,
-                modelClass: Passenger,
-                join: {
-                    from: 'User.id',
-                    to: 'Passenger.userId'
-                }
-            },
+            
             Ride: {
                 relation: Model.ManyToManyRelation,
-                modelClass: Ride,
+                modelClass: __dirname+'./Ride',
                 join: {
                     from: 'User.id',
                     through: {
@@ -29,7 +41,7 @@ class User extends Model {
             },
             Driver: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: Driver,
+                modelClass: __dirname+'./Driver',
                 join: {
                     from: 'User.id',
                     to: 'Driver.userId'
@@ -37,7 +49,7 @@ class User extends Model {
             },
             State: {
                 relation: Model.ManyToManyRelation,
-                modelClass: State,
+                modelClass: __dirname+'./State',
                 join: {
                     from: 'User.id',
                     through: {
@@ -50,6 +62,7 @@ class User extends Model {
             },
         }
     }
-}
+    
+} 
 
 module.exports = User;

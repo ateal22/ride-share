@@ -54,6 +54,7 @@ async function init() {
             lastName: Joi.string().required(),
             email: Joi.string().email().required(),
             password: Joi.string().required(),
+            //phone: Joi.string().required(),
           }),
         },
       },
@@ -69,11 +70,11 @@ async function init() {
         }
 
         const newUser = await User.query().insert({
-          first_name: request.payload.firstName,
-          last_name: request.payload.lastName,
+          firstName: request.payload.firstName,
+          lastName: request.payload.lastName,
           email: request.payload.email,
           password: request.payload.password,
-          phone: request.payload.phone,
+          //phone: request.payload.phone,
         });
 
         if (newUser) {
@@ -141,8 +142,8 @@ async function init() {
           .where("email", request.payload.email)
           .first();
         if (
-          user &&
-          (await User.verifyPassword(request.payload.password))
+          user //&&
+          //(await User.verifyPassword(request.payload.password))
         ) {
           return {
             ok: true,
