@@ -1,10 +1,5 @@
 <template>
-
-
   <v-container>
-
-    
-
     <div align="center">
       <h4 class="display-1">Rides</h4>
 
@@ -65,7 +60,7 @@
           >Sign up as Driver
         </v-btn>
 
-        <v-btn v-on:click="popup" align="left" color="success" class="mx-10"
+        <v-btn v-on:click="popup" align="center" color="success" class="mx-10"
           >popup test
         </v-btn>
 

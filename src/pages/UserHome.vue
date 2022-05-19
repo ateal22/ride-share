@@ -9,7 +9,7 @@
           >Become a driver
         </v-btn>
 
-        <v-btn v-on:click="toUsers" align="center" color="success" class="mx-10"
+        <v-btn v-on:click="popup" align="center" color="success" class="mx-10"
           >View all users
         </v-btn>
 
@@ -29,6 +29,9 @@
 export default {
   data() {
     return {
+      dialogHeader: "<no dialogHeader>",
+      dialogText: "<no dialogText>",
+      dialogVisible: false,
       driver: "",
       snackbar: {
         show: false,
@@ -52,15 +55,29 @@ export default {
         .catch((err) => this.showSnackbar(err));
     },
 
+    showDialog: function(header, text) {
+      this.dialogHeader = header;
+      this.dialogText = text;
+      this.dialogVisible = true;
+    },
+
+    hideDialog: function() {
+      this.dialogVisible = false;
+    },
+
     toRides: function() {
         this.$router.push({ name: "rides" });
+    },
+
+    popup: function() {
+      this.showDialog("info")
     },
 
     toUsers: function() {
       if (this.User.isAdmin==true){
         this.$router.push({ name: "users" });
       } else {
-        this.showSnackbar(this.snackbar.setText("You have to be an Admin to see all the Users."));
+        this.showDialog("info")
       }
     },
 
