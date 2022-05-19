@@ -185,6 +185,7 @@ async function init() {
       return Ride.query();
     },
   },
+  
 
   /*{
     method: "POST",

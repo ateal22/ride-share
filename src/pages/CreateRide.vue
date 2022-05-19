@@ -1,0 +1,157 @@
+<template>
+  <v-container>
+    <div>
+      <h4 class="display-1">Create a Ride</h4>
+
+
+
+      <v-form>
+        <v-text-field
+          v-model="newRide.fromLocation"
+          label="Starting Location"
+        ></v-text-field>
+        <v-text-field
+          v-model="newRide.toLocation"
+          label="Destination"
+        ></v-text-field>
+        <v-text-field
+          v-model="newRide.date"
+          label="Departure Date"
+        >
+        </v-text-field>
+        <v-text-field
+          v-model="newRide.time"
+          label="Departure Time"
+          required
+        >
+        </v-text-field>
+        <v-btn v-bind:disabled="!valid" v-on:click="handleSubmit"
+          >Sign Up
+        </v-btn>
+      </v-form>
+
+      <div class="text-xs-center">
+        <v-dialog v-model="dialogVisible" width="500">
+          <v-card>
+            <v-card-title primary-title>
+              {{ dialogHeader }}
+            </v-card-title>
+
+            <v-card-text>
+              {{ dialogText }}
+            </v-card-text>
+
+            <v-divider></v-divider>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="primary" text v-on:click="hideDialog">Okay</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </div>
+    </div>
+  </v-container>
+</template>
+
+<script>
+
+
+export default {
+  name: "SignUpPage",
+  
+  data: function () {
+    return {
+      valid: false, // Are all the fields in the form valid?
+
+      // Object to collect user data
+      newRide: {
+        date:"",
+        time:"",
+        fname: "",
+        faddress: "",
+        fcity: "",
+        fstate: "",
+        fzipCode:"",
+        tname: "",
+        taddress: "",
+        tcity: "",
+        tstate: "",
+        tzipCode:"",
+      },
+
+      // Was an user created successfully?
+      rideCreated: false,
+
+      // Data to be displayed by the dialog.
+      dialogHeader: "<no dialogHeader>",
+      dialogText: "<no dialogText>",
+      dialogVisible: false,
+
+      // Validation rules for the form fields. This functionality is an extension
+      // that's part of the Vuetify package. Each rule is a list of functions
+      // (note the fat arrows). Vuetify invokes all functions in the list,
+      // passing it the content of the associated form field. Functions should
+      // return either true (the field passes that validation) or a string
+      // containing an error message indicating why the field doesn't pass validation.
+     
+    };
+  },
+  methods: {
+    // Invoked when the user clicks the 'Sign Up' button.
+    handleSubmit: function () {
+      // Haven't been successful yet.
+      this.rideCreated = false;
+
+      // Post the content of the form to the Hapi server.
+      this.$axios
+      .post("/rides", {
+          time: this.newRide.time,
+          date: this.newRide.date,
+      })
+        .post("/location", {
+          fname: this.newRide.fromLocation,
+          faddres: this.newRide.address,
+          fcity: this.newRide.city,
+          fstate: this.newRide.state,
+          fzipCode: this.newRide.zipCode,
+        })
+        .post("/location", {
+          tname: this.newRide.fromLocation,
+          taddres: this.newRide.address,
+          tcity: this.newRide.city,
+          tstate: this.newRide.state,
+          tzipCode: this.newRide.zipCode,
+        })
+        .then((result) => {
+          // Based on whether things worked or not, show the
+          // appropriate dialog.
+          if (result.data.ok) {
+            this.showDialog("Success", result.data.msge);
+            this.userCreated = true;
+          } else {
+            this.showDialog("Sorry", result.data.msge);
+          }
+        })
+        .catch((err) => this.showDialog("Failed", err));
+    },
+
+    // Helper method to display the dialog box with the appropriate content.
+    showDialog: function (header, text) {
+      this.dialogHeader = header;
+      this.dialogText = text;
+      this.dialogVisible = true;
+    },
+
+    // Invoked by the "Okay" button on the dialog; dismiss the dialog
+    // and navigate to the home page.
+    hideDialog: function () {
+      this.dialogVisible = false;
+      if (this.rideCreated) {
+        // Only navigate away from the sign-up page if we were successful.
+        this.$router.push({ name: "rides" });
+      }
+    },
+  },
+};
+</script>
