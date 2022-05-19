@@ -116,7 +116,7 @@ export default {
 
       // Post the content of the form to the Hapi server.
       this.$axios
-        .post("/User", {
+        .post("/users", {
           firstName: this.newMember.firstName,
           lastName: this.newMember.lastName,
           email: this.newMember.email,
