@@ -68,26 +68,22 @@ export default {
         isAdmin: users.isAdmin,
       }));
     }),
+
     this.$axios.get("/driver").then(response => {
       this.driver = response.data.map(driver => ({
         userId: driver.userId,
       }));
-    });
+    })
+    .catch((err) => this.showSnackbar(err));
   },
 
   methods: {
     isDriver: function() {
-      this.$axios
-        .get("/driver", {
-          driver: this.driver,
-        })
-        .then((result) => {
-          this.showSnackbar(result.data.msge);
-          if (this.userId != 1) {
-              this.showSnackbar(this.snackbar.setText("You're already a Driver."));
-          }
-        })
-        .catch((err) => this.showSnackbar(err));
+        if (this.userId == 1) {
+            this.showDialog("You're already a Driver.");
+        } else {
+          this.$router.push({ name: "driver" });
+        }
     },
 
     showDialog: function(header, text) {
@@ -104,16 +100,11 @@ export default {
         this.$router.push({ name: "rides" });
     },
 
-    popup: function() {
-      this.showDialog("info")
-    },
-
     toUsers: function() {
-      if (this.isAdmin==true){
+      if (this.isAdmin == true){
         this.$router.push({ name: "users" });
-      }
-      if (this.isAdmin!=true) {
-        this.showDialog("Only Admins can view all users.")
+      } else {
+        this.showDialog("Only Admins can view all users.");
       }
     },
 
