@@ -1,4 +1,5 @@
 const User = require('./User');
+const Location = require('./Location');
 class State extends Model {
     static get tableName() {
         return 'State';
@@ -20,7 +21,7 @@ class State extends Model {
             },
             Vehicle: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: Vehicle,
+                modelClass: __dirname+'./Vehicle',
                 join: {
                     from: 'Vehicle.licenseState',
                     to: 'State.abbreviation'
@@ -28,7 +29,7 @@ class State extends Model {
             },
             Driver: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: Driver,
+                modelClass: __dirname+'./Driver',
                 join: {
                     from: 'Driver.licenseState',
                     to: 'State.abbreviation'
@@ -47,7 +48,7 @@ class State extends Model {
 
     }
 }
-
+module.exports = State;
 
 
 

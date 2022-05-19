@@ -8,7 +8,7 @@ class Location extends Model {
         return {
             State: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: State,
+                modelClass: __dirname+'./State',
                 join: {
                     from: 'State.abbreviation',
                     to: 'Location.State'

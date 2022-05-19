@@ -1,4 +1,7 @@
+objection = require('objection');
+const Model = objection.Model;
 const User = require('./User');
+
 class Ride extends Model {
     static get tableName() {
         return 'Ride';

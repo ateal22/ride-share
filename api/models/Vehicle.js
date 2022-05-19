@@ -1,3 +1,5 @@
+const State = require('./State');
+const Driver = require('./Driver');
 class Vehicle extends Model {
     static get tableName() {
         return 'Vehicle';
@@ -19,7 +21,7 @@ class Vehicle extends Model {
             },
             Authorization: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: Authorization,
+                modelClass: ___dirname+'./Authorization',
                 join: {
                     from: 'Authorization.vehicleId',
                     to: 'Vehicle.id'
@@ -35,7 +37,7 @@ class Vehicle extends Model {
             },
             VehicleType: {
                 relation: Model.BelongsToOneRelation,
-                modelClass: VehicleType,
+                modelClass: __dirname+'./VehicleType',
                 join: {
                     from: 'VehicleType.id',
                     to: 'Vehicle.vehicleTypeId'
@@ -44,6 +46,6 @@ class Vehicle extends Model {
         }
     }
 }
-
+module.exports = Vehicle;
 
 
