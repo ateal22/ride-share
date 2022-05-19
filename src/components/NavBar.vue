@@ -6,7 +6,7 @@
       </v-toolbar-title>
     </router-link>
 
-    <router-link v-if="isLoggedIn" v-bind:to="{ name: 'user-home' }">
+    <router-link v-if="isLoggedIn" v-bind:to="{ name: 'userhome' }">
       <v-toolbar-title class="white--text font-weight-bold">
         RideZone
       </v-toolbar-title>
