@@ -9,6 +9,10 @@
           >Become a driver
         </v-btn>
 
+        <v-btn v-on:click="popup" align="center" color="success" class="mx-10"
+          >View all users
+        </v-btn>
+
         <v-btn v-on:click="toRides" align="right" color="success" class="mx-10"
           >Create or Join a Ride
         </v-btn>
@@ -25,6 +29,9 @@
 export default {
   data() {
     return {
+      dialogHeader: "<no dialogHeader>",
+      dialogText: "<no dialogText>",
+      dialogVisible: false,
       driver: "",
       snackbar: {
         show: false,
@@ -42,14 +49,36 @@ export default {
         .then((result) => {
           this.showSnackbar(result.data.msge);
           if (this.Driver.userId != 1) {
-              this.showSnackbar(this.snackbar.setText("You're already a Driver."))
+              this.showSnackbar(this.snackbar.setText("You're already a Driver."));
           }
         })
         .catch((err) => this.showSnackbar(err));
     },
 
+    showDialog: function(header, text) {
+      this.dialogHeader = header;
+      this.dialogText = text;
+      this.dialogVisible = true;
+    },
+
+    hideDialog: function() {
+      this.dialogVisible = false;
+    },
+
     toRides: function() {
         this.$router.push({ name: "rides" });
+    },
+
+    popup: function() {
+      this.showDialog("info")
+    },
+
+    toUsers: function() {
+      if (this.User.isAdmin==true){
+        this.$router.push({ name: "users" });
+      } else {
+        this.showDialog("info")
+      }
     },
 
     showSnackbar(msge) {
