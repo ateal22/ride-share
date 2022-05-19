@@ -30,7 +30,7 @@
     <v-btn v-if="isLoggedIn" text @click="signOut">Log Out</v-btn>
     <v-btn text v-bind:to="{ name: 'about-us' }">About Us</v-btn>
     <v-btn text v-bind:to="{ name: 'rides' }">Rides</v-btn>
-    <v-btn text v-bind:to="{ name: 'map' }">Map</v-btn>
+    <v-btn text v-bind:to="{ name: 'details' }">Ride Details</v-btn>
 
 
     <v-menu v-if="isLoggedIn" offset-y>

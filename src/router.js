@@ -7,8 +7,9 @@ import SignUp from "./pages/SignUp.vue";
 import About from "./pages/About.vue";
 import User from "./pages/Users.vue";
 import Rides from "./pages/Rides.vue";
-import Map from "./pages/Map.vue";
+import Details from "./pages/Details.vue";
 import UserHome from "./pages/UserHome.vue";
+import CreateRide from "./pages/CreateRide.vue";
 
 Vue.use(Router);
 
@@ -22,7 +23,8 @@ export default new Router({
     { name: "about-us", path: "/about-us", component: About },
     { name: "users", path: "/users", component: User },
     { name: "rides", path: "/rides", component: Rides },
-    { name: "map", path: "/map", component: Map },
+    { name: "details", path: "/details", component: Details },
     { name: "userhome", path: "/userhome", component: UserHome },
+    { name: "createride", path: "/createride", component: CreateRide },
   ]
 });

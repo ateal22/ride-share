@@ -166,12 +166,12 @@ async function init() {
     },
     {
       method: "GET",
-      path: "/map",
+      path: "/details",
       config: {
-        description: "map",
+        description: "details",
       },
       handler: (request, h) => {
-        return User.query();
+        return Ride.query();
       },
     },
     

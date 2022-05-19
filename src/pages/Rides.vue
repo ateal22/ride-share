@@ -19,8 +19,8 @@
         <tr v-bind:class="itemClass(item)">
           <td>{{ item.date }}</td>
           <td>{{ item.time }}</td>
-          <td>{{ item.fromLocation }}</td>
-          <td>{{ item.toLocation }}</td>
+          <td>{{ item.fromLocationId }}</td>
+          <td>{{ item.toLocationId }}</td>
           <td>{{ item.distance }}</td>
           <td>
             <v-icon small @click="deleteRide(item)">
@@ -30,6 +30,9 @@
         </tr>
       </template>
     </v-data-table>
+
+    
+
 
     <v-snackbar v-model="snackbar.show">
         {{ snackbar.text }}
@@ -50,10 +53,11 @@ export default {
       headers: [
         { text: "Date", value: "date" },
         { text: "Time", value: "time" },
-        { text: "From Location", value: "fromLocation" },
-        { text: "To Location", value: "toLocation" }
+        { text: "From Location", value: "fromLocationId" },
+        { text: "To Location", value: "toLocationId" },
+        { text: "Distance", value: "distance" }
       ],
-      accounts: [],
+      rides: [],
 
       snackbar: {
         show: false,
@@ -67,11 +71,14 @@ export default {
       this.rides = response.data.map(rides => ({
         date: rides.date,
         time: rides.time,
-        fromLocation: rides.fromLocation,
-        toLocation: rides.toLocation
+        fromLocation: rides.fromLocationId,
+        toLocation: rides.toLocationId,
+        distance: rides.distance
       }));
     });
   },
+    
+
 
   methods: {
     // Display a snackbar message.
