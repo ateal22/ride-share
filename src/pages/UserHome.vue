@@ -1,7 +1,7 @@
 <template>
     <v-container>
     <div class="container">
-      <h1 class="display-1 text-center">Welcome, getUser !!</h1>
+      <h1 class="display-1 text-center">Sign in successful, welcome!!</h1>
 
     </div>
     <div align="center" class="mt-10">
@@ -9,7 +9,7 @@
           >Become a driver
         </v-btn>
 
-        <v-btn v-on:click="popup" align="center" color="success" class="mx-10"
+        <v-btn v-on:click="toUsers" align="center" color="success" class="mx-10"
           >View all users
         </v-btn>
 
@@ -62,6 +62,19 @@ export default {
     };
   },
 
+  mounted: function() {
+    this.$axios.get("/users").then(response => {
+      this.users = response.data.map(users => ({
+        isAdmin: users.isAdmin,
+      }));
+    }),
+    this.$axios.get("/driver").then(response => {
+      this.driver = response.data.map(driver => ({
+        userId: driver.userId,
+      }));
+    });
+  },
+
   methods: {
     isDriver: function() {
       this.$axios
@@ -70,7 +83,7 @@ export default {
         })
         .then((result) => {
           this.showSnackbar(result.data.msge);
-          if (this.Driver.userId != 1) {
+          if (this.userId != 1) {
               this.showSnackbar(this.snackbar.setText("You're already a Driver."));
           }
         })
@@ -96,9 +109,10 @@ export default {
     },
 
     toUsers: function() {
-      if (this.User.isAdmin==true){
+      if (this.isAdmin==true){
         this.$router.push({ name: "users" });
-      } else {
+      }
+      if (this.isAdmin!=true) {
         this.showDialog("Only Admins can view all users.")
       }
     },

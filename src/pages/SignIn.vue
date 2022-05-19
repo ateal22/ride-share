@@ -64,7 +64,7 @@ export default {
           this.showSnackbar(result.data.msge);
           if (result.data.ok) {
             this.$store.commit("logIn", result.data.details);
-            this.$router.push({ name: "user-home" });
+            this.$router.push({ name: "userhome" });
           }
         })
         .catch((err) => this.showSnackbar(err));
